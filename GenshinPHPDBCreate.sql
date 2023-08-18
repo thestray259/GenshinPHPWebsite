@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS GenshinPHP;
+USE GenshinPHP;
 
 drop table MyUsers;
 drop table MyWebDocs;
@@ -6,7 +7,7 @@ drop table Characters;
 drop table ArtifactSets;
 drop table Teams;
 
-USE GenshinPHP;
+
 
 create table if not exists MyUsers(
  ID int not null AUTO_INCREMENT PRIMARY KEY,
@@ -122,7 +123,28 @@ Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Travler", "Anemo", 5, "Sword", 1, true);
 
-INSERT INTO ArtifactSets (ArtifactSetName) values ("test");
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
+values ("Amber", "Pyro", 4, "Bow", 1, true);
+
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
+values ("Lisa", "Electro", 4, "Catalyst", false);
+
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
+values ("Kaeya", "Cryo", 4, "Sword", false);
+
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
+values ("Noelle", "Geo", 4, "Claymore", false);
+
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
+values ("Collei", "Dendro", 4, "Bow", false);
+
+INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
+values ("Barbra", "Hydro", 4, "Catalyst", 3, false);
+
+INSERT INTO ArtifactSets (ArtifactSetName) values ("Adventurer");
+INSERT INTO ArtifactSets (ArtifactSetName) values ("Instructor");
+INSERT INTO ArtifactSets (ArtifactSetName) values ("Berserker");
+INSERT INTO ArtifactSets (ArtifactSetName) values ("Traveling Doctor");
 
 SELECT cha.CharacterID, cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, artSets.ArtifactSetName
    FROM Characters cha LEFT JOIN ArtifactSets artSets

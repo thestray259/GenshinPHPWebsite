@@ -17,7 +17,7 @@ if (isset($_COOKIE["MyStyle"])) {
     setcookie("MyStyle", 1, strtotime("+1 week"));
 }
 
-$myTitle = "Star Rail Database";
+$myTitle = "Genshin Impact Database";
 
 include_once "dbConnector.php";
 include_once "Helper.php";

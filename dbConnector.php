@@ -4,7 +4,7 @@
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PSWD', 'Booboo1204!');
 DEFINE('DB_SERVER', 'localhost');
-DEFINE('DB_NAME', 'mytestdb');
+DEFINE('DB_NAME', 'genshinphp');
 
 // ///////////////////////////////////////////////////
 // Get db connection
@@ -59,6 +59,59 @@ function MyPageremove($dbConn, $Id) {
     return @mysqli_query($dbConn, $query);
 }
 
+function MyJoinJsonGet($dbConn)
+{
+    $query = "SELECT JSON_OBJECT(
+        'CharacterName', cha.CharacterName,
+        'CharacterLevel', cha.CharacterLevel,
+        'Element', cha.Element,
+        'ConstellationLevel', cha.ConstellationLevel,
+        'StarRating', cha.StarRating,
+        'WeaponType', cha.WeaponType,
+        'ArtifactId', cha.ArtifactId,
+        'Obtained', cha.Obtained,
+        'ArtifactSetName', art.ArtifactSetName) as Json1
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID;";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function MyJoinWhereGetCharacterID($dbConn, $id)
+{
+    $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterID = '" . $id . "' limit 1";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function MyJoinWhereGetCharacterName($dbConn, $name)
+{
+    $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $name . "' limit 1";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function MyJoinWhereGetCharacterElement($dbConn, $element)
+{
+    $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $element . "'";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function MyJoinWhereGetCharacterObtained($dbConn, $obtained)
+{
+    $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $obtained . "'";
+
+    return @mysqli_query($dbConn, $query);
+}
 
 ?>
 
