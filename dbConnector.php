@@ -144,12 +144,21 @@ function GetArtifactContent($dbConn, $Id)
 {
     $return = null;
 
-    $query = "SELECT ArtifactSetID, ArtifactSetName FROM ArtifactSets where isActive = 1 and ArtifactSetID = " . $Id;
+    $query = "SELECT art.ArtifactSetID, art.ArtifactSetName, img.ImageData, art.isActive FROM ArtifactSets art LEFT JOIN Images img ON art.ImageId = img.ImageId WHERE art.isActive = 1 AND art.ArtifactSetID = " . $Id;
     $return = @mysqli_query($dbConn, $query);
 
     return $return;
 }
 
+function GetTeams($dbConn)
+{
+    $query = "SELECT team.TeamID, team.TeamName, team.Info, cha1.CharacterName, cha2.CharacterName, cha3.CharacterName, cha4.CharacterName
+            FROM Teams team LEFT JOIN Characters cha1 ON team.CharacterId1 = cha1.CharacterID
+            LEFT JOIN Characters cha2 ON team.CharacterId2 = cha2.CharacterID
+            LEFT JOIN Characters cha3 ON team.CharacterId3 = cha3.CharacterID
+            LEFT JOIN Characters cha4 ON team.CharacterId4 = cha4.CharacterID WHERE team.isActive = 1";
+    return @mysqli_query($dbConn, $query);
+}
 ?>
 
 
