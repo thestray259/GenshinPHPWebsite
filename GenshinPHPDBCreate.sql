@@ -1,11 +1,11 @@
 CREATE DATABASE IF NOT EXISTS GenshinPHP;
 USE GenshinPHP;
 
-drop table MyUsers;
-drop table MyWebDocs;
-drop table Characters;
-drop table ArtifactSets;
-drop table Teams;
+drop table IF EXISTS MyUsers;
+drop table IF EXISTS MyWebDocs;
+drop table IF EXISTS Characters;
+drop table IF EXISTS ArtifactSets;
+drop table IF EXISTS Teams;
 
 
 
