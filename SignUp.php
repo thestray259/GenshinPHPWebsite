@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $num = mysqli_num_rows($result);
 
     if($num == 0) {
-        if($exists==false && strlen($username) > 0 && strlen($password)) {
+        if($exists==false && strlen($username) > 0 && strlen($password) > 0) {
 
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($showError) {
 
             echo ' <div>
-                    <strong>Error!</strong> ' . $erro . '
+                    <strong>Error!</strong> ' . $errorMessage . '
                     </div> ';
         }
 

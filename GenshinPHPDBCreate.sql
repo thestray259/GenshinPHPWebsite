@@ -1,11 +1,11 @@
 CREATE DATABASE IF NOT EXISTS GenshinPHP;
 USE GenshinPHP;
 
-drop table MyUsers;
--- drop table MyWebDocs;
--- drop table Characters;
--- drop table ArtifactSets;
--- drop table Teams;
+drop table IF EXISTS MyUsers;
+drop table IF EXISTS MyWebDocs;
+drop table IF EXISTS Characters;
+drop table IF EXISTS ArtifactSets;
+drop table IF EXISTS Teams;
 
 
 
@@ -13,8 +13,8 @@ create table if not exists MyUsers(
  ID int not null AUTO_INCREMENT PRIMARY KEY,
  UserId varchar(25),
  Pswd varchar(100),
- isAdmin tinyint,
- isActive tinyint
+ isAdmin tinyint(1),
+ isActive tinyint(1)
 );
 
 create table if not exists MyWebDocs(
@@ -25,7 +25,7 @@ create table if not exists MyWebDocs(
  Text1 varchar(225),
  ParentPage int DEFAULT 0,
  SortOrder int DEFAULT 2,
- isActive int
+ isActive tinyint
 );
 
 CREATE TABLE IF NOT EXISTS Characters(
@@ -37,24 +37,30 @@ CREATE TABLE IF NOT EXISTS Characters(
     StarRating int,
     WeaponType varchar(25),
     ArtifactId int,
-    Obtained tinyint DEFAULT 0
+	isActive tinyint,
+    Obtained bool DEFAULT false
 );
 
 CREATE TABLE IF NOT EXISTS ArtifactSets(
 	ArtifactSetID int not null auto_increment primary key,
-    ArtifactSetName varchar(50) not null
+    ArtifactSetName varchar(50) not null,
+    Info varchar(225),
+	isActive tinyint
 );
 
 CREATE TABLE IF NOT EXISTS Teams(
 	TeamID int not null auto_increment primary key,
     TeamName varchar(50) not null,
+    Info varchar(225),
     CharacterId1 int not null,
     CharacterId2 int not null,
     CharacterId3 int not null,
-    CharacterId4 int not null
+    CharacterId4 int not null,
+    isActive tinyint default 1
 );
 
 SELECT * FROM myusers where myusers.userid = 'myuser';
+SELECT * FROM MyUsers WHERE MyUsers.UserID = 'admin' AND MyUsers.Pswd = '$2y$10$MWuQ1e7u2esZVBxhT1E5keOkdRfIPQsj7SY7BkYycsyasRxGA0hJm';
 
 -- Sample data
 INSERT INTO MyUsers (UserId, Pswd, isAdmin, isActive)
@@ -121,7 +127,7 @@ Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf 
 -- Characers
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Travler", "Anemo", 5, "Sword", 1, 1);
+values ("Travler", "Anemo", 5, "Sword", 1, true);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Amber", "Pyro", 4, "Bow", 1, 1);
@@ -141,10 +147,12 @@ values ("Collei", "Dendro", 4, "Bow", 0);
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Barbra", "Hydro", 4, "Catalyst", 3, 0);
 
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Adventurer");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Instructor");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Berserker");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Traveling Doctor");
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Adventurer", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Instructor", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Berserker", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Traveling Doctor", 1);
+
+Select * FROM ArtifactSets;
 
 SELECT cha.CharacterID, cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, artSets.ArtifactSetName
    FROM Characters cha LEFT JOIN ArtifactSets artSets

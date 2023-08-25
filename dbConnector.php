@@ -2,7 +2,7 @@
 
 // Create constants
 DEFINE('DB_USER', 'root');
-DEFINE('DB_PSWD', 'Booboo1204!');
+DEFINE('DB_PSWD', 'stupid');
 DEFINE('DB_SERVER', 'localhost');
 DEFINE('DB_NAME', 'genshinphp');
 
@@ -32,7 +32,13 @@ function CheckIfUsernameExists($dbConn, $newUsername) {
 }
 
 function GetUser($dbConn, $userName, $password) {
-    $query = "SELECT * FROM MyUsers WHERE MyUsers.UserID = ''$userName AND MyUsers.Pswd = '$password'";
+    $query = "SELECT * FROM MyUsers WHERE MyUsers.UserID = '$userName' AND MyUsers.Pswd = '$password'";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetHashedPassword($dbConn, $userName) {
+    $query = "SELECT Pswd FROM MyUsers WHERE MyUsers.UserID = '$userName'";
 
     return @mysqli_query($dbConn, $query);
 }
@@ -72,7 +78,7 @@ return $return;
 
 // ///////////////////////////////////////////////////
 // Get all the page records
-function MyPageremove($dbConn, $Id) {
+function MyPageRemove($dbConn, $Id) {
 
     // Never delete a page. set it to incative
     $query = "Update FROM MyWebDocs set isActive = 0 where id = " . $Id;
@@ -129,9 +135,19 @@ function MyJoinWhereGetCharacterObtained($dbConn, $obtained)
 {
     $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
         FROM Characters cha LEFT JOIN ArtifactSets art
-        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Obtained = '" . $obtained . "'";
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $obtained . "'";
 
     return @mysqli_query($dbConn, $query);
+}
+
+function GetArtifactContent($dbConn, $Id)
+{
+    $return = null;
+
+    $query = "SELECT ArtifactSetID, ArtifactSetName FROM ArtifactSets where isActive = 1 and ArtifactSetID = " . $Id;
+    $return = @mysqli_query($dbConn, $query);
+
+    return $return;
 }
 
 ?>
