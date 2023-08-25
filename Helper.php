@@ -39,7 +39,7 @@ function PageDisplay($PageData) {
 function GetDBObtainedCharacters()
 {
     $myDbConn = ConnGet();
-    $myGet = $_GET["obtained"];
+    $myGet = 1;
 
     $DataSet = MyJoinWhereGetCharacterObtained($myDbConn, $myGet);
 
@@ -47,6 +47,24 @@ function GetDBObtainedCharacters()
     {
         if ($row = mysqli_fetch_array($DataSet))
         {
+            $myJson = '[{"CharacterName":' . $row['CharacterName'] . '","CharacterLevel":"' . $row['CharacterLevel']
+                . '","Element":"' . $row['Element'] . '","ConstellationLevel":"' . $row['ConstellationLevel'] . '","StarRating":"'
+                . $row['StarRating'] . '"WeaponType":"' . $row['WeaponType'] . '"}]';
+        }
+    }
+    mysqli_close($myDbConn);
+    echo $myJson;
+}
+
+function GetDBNotObtainedCharacters()
+{
+    $myDbConn = ConnGet();
+    $myGet = 0;
+
+    $DataSet = MyJoinWhereGetCharacterObtained($myDbConn, $myGet);
+
+    if ($DataSet) {
+        if ($row = mysqli_fetch_array($DataSet)) {
             $myJson = '[{"CharacterName":' . $row['CharacterName'] . '","CharacterLevel":"' . $row['CharacterLevel']
                 . '","Element":"' . $row['Element'] . '","ConstellationLevel":"' . $row['ConstellationLevel'] . '","StarRating":"'
                 . $row['StarRating'] . '"WeaponType":"' . $row['WeaponType'] . '"}]';

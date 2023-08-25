@@ -3,7 +3,6 @@ include_once "MyHeader.php";
 include_once "Helper.php";
 
 $myHeader = "Characters";
-$obtained = true;
 ?>
 
 <!--<h2>March 7th</h2>
@@ -29,12 +28,16 @@ echo '<form method="get"> Input a character name: <input type="text" name="chaNa
 if (array_key_exists("btnObtained", $_GET))
 {
     $obtained = 1;
-    GetDBObtainedCharacters();
+    if (preg_match('~[0-9]+~', $obtained)) {
+        GetDBObtainedCharacters();
+    } else {
+        echo "Index must be a number. Your input: " . $obtained . "<br>";
+    }
 }
 
 if (array_key_exists("btnNotObtained", $_GET)) {
     $obtained = 0;
-    //GetDBNotObtainedCharacters();
+    GetDBNotObtainedCharacters();
 }
 
 if (array_key_exists("btnAll", $_GET)) {

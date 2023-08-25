@@ -2,7 +2,7 @@
 
 // Create constants
 DEFINE('DB_USER', 'root');
-DEFINE('DB_PSWD', 'Nu190935810!');
+DEFINE('DB_PSWD', 'Booboo1204!');
 DEFINE('DB_SERVER', 'localhost');
 DEFINE('DB_NAME', 'genshinphp');
 
@@ -27,7 +27,7 @@ function AddNewUser($dbConn, $newUsername, $newPassword) {
 
 function CheckIfUsernameExists($dbConn, $newUsername) {
     $query = "SELECT UserID FROM MyUsers WHERE MyUsers.UserID = '$newUsername'";
-    
+
     return @mysqli_query($dbConn, $query);
 }
 
@@ -120,7 +120,7 @@ function MyJoinWhereGetCharacterElement($dbConn, $element)
 {
     $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
         FROM Characters cha LEFT JOIN ArtifactSets art
-        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $element . "'";
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Element = '" . $element . "'";
 
     return @mysqli_query($dbConn, $query);
 }
@@ -129,7 +129,7 @@ function MyJoinWhereGetCharacterObtained($dbConn, $obtained)
 {
     $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
         FROM Characters cha LEFT JOIN ArtifactSets art
-        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $obtained . "'";
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Obtained = '" . $obtained . "'";
 
     return @mysqli_query($dbConn, $query);
 }

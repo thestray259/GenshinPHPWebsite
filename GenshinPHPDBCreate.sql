@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Characters(
     StarRating int,
     WeaponType varchar(25),
     ArtifactId int,
-    Obtained bool DEFAULT false
+    Obtained tinyint DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS ArtifactSets(
@@ -121,25 +121,25 @@ Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf 
 -- Characers
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Travler", "Anemo", 5, "Sword", 1, true);
+values ("Travler", "Anemo", 5, "Sword", 1, 1);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Amber", "Pyro", 4, "Bow", 1, true);
+values ("Amber", "Pyro", 4, "Bow", 1, 1);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Lisa", "Electro", 4, "Catalyst", false);
+values ("Lisa", "Electro", 4, "Catalyst", 0);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Kaeya", "Cryo", 4, "Sword", false);
+values ("Kaeya", "Cryo", 4, "Sword", 0);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Noelle", "Geo", 4, "Claymore", false);
+values ("Noelle", "Geo", 4, "Claymore", 0);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Collei", "Dendro", 4, "Bow", false);
+values ("Collei", "Dendro", 4, "Bow", 0);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Barbra", "Hydro", 4, "Catalyst", 3, false);
+values ("Barbra", "Hydro", 4, "Catalyst", 3, 0);
 
 INSERT INTO ArtifactSets (ArtifactSetName) values ("Adventurer");
 INSERT INTO ArtifactSets (ArtifactSetName) values ("Instructor");
@@ -149,3 +149,7 @@ INSERT INTO ArtifactSets (ArtifactSetName) values ("Traveling Doctor");
 SELECT cha.CharacterID, cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, artSets.ArtifactSetName
    FROM Characters cha LEFT JOIN ArtifactSets artSets
    ON cha.ArtifactId = artSets.ArtifactSetID;
+   
+   SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
+        FROM Characters cha LEFT JOIN ArtifactSets art
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Obtained = 1;
