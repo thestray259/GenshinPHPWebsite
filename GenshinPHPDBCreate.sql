@@ -12,7 +12,7 @@ drop table MyUsers;
 create table if not exists MyUsers(
  ID int not null AUTO_INCREMENT PRIMARY KEY,
  UserId varchar(25),
- Pswd varchar(25),
+ Pswd varchar(100),
  isAdmin tinyint,
  isActive tinyint
 );
