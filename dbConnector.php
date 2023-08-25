@@ -140,6 +140,13 @@ function MyJoinWhereGetCharacterObtained($dbConn, $obtained)
     return @mysqli_query($dbConn, $query);
 }
 
+function GetArtifacts($dbConn)
+{
+    $query = "SELECT ArtifactSetID, ArtifactSetName FROM ArtifactSets WHERE isActive = 1 order by ArtifactSetID asc";
+
+    return @mysqli_query($dbConn, $query);
+}
+
 function GetArtifactContent($dbConn, $Id)
 {
     $return = null;

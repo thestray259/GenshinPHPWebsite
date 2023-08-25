@@ -1,4 +1,5 @@
 <?php
+$myHeader = "Artifacts";
 include_once "../MyHeader.php";
 $artifacts = GetArtifacts($myDbConn);
 ?>
@@ -22,7 +23,6 @@ $artifacts = GetArtifacts($myDbConn);
                 </td>
             </tr>";
     }
-
     unset($data)
     ?>
 </table>
