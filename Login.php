@@ -22,7 +22,9 @@ if($_SESSION['isAdmin'] == 1) {
         <button class="login-btn" type="submit" name="login">Login</button>
 
     </form>
-        <button class="signup-btn"> Sign up</button>
+    <form action="/SignUp.php">
+        <button class="signup-btn" type="submit"> Sign up</button>
+    </form>
 
 
 </div>
