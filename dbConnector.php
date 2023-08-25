@@ -32,7 +32,13 @@ function CheckIfUsernameExists($dbConn, $newUsername) {
 }
 
 function GetUser($dbConn, $userName, $password) {
-    $query = "SELECT * FROM MyUsers WHERE MyUsers.UserID = ''$userName AND MyUsers.Pswd = '$password'";
+    $query = "SELECT * FROM MyUsers WHERE MyUsers.UserID = '$userName' AND MyUsers.Pswd = '$password'";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetHashedPassword($dbConn, $userName) {
+    $query = "SELECT Pswd FROM MyUsers WHERE MyUsers.UserID = '$userName'";
 
     return @mysqli_query($dbConn, $query);
 }

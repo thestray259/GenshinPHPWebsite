@@ -13,8 +13,8 @@ create table if not exists MyUsers(
  ID int not null AUTO_INCREMENT PRIMARY KEY,
  UserId varchar(25),
  Pswd varchar(100),
- isAdmin tinyint,
- isActive tinyint
+ isAdmin tinyint(1),
+ isActive tinyint(1)
 );
 
 create table if not exists MyWebDocs(
@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS Teams(
 );
 
 SELECT * FROM myusers where myusers.userid = 'myuser';
+SELECT * FROM MyUsers WHERE MyUsers.UserID = 'admin' AND MyUsers.Pswd = '$2y$10$MWuQ1e7u2esZVBxhT1E5keOkdRfIPQsj7SY7BkYycsyasRxGA0hJm';
 
 -- Sample data
 INSERT INTO MyUsers (UserId, Pswd, isAdmin, isActive)
