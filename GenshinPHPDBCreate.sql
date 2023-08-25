@@ -2,10 +2,10 @@ CREATE DATABASE IF NOT EXISTS GenshinPHP;
 USE GenshinPHP;
 
 drop table MyUsers;
--- drop table MyWebDocs;
--- drop table Characters;
--- drop table ArtifactSets;
--- drop table Teams;
+drop table MyWebDocs;
+drop table Characters;
+drop table ArtifactSets;
+drop table Teams;
 
 
 
@@ -25,7 +25,7 @@ create table if not exists MyWebDocs(
  Text1 varchar(225),
  ParentPage int DEFAULT 0,
  SortOrder int DEFAULT 2,
- isActive int
+ isActive tinyint
 );
 
 CREATE TABLE IF NOT EXISTS Characters(
@@ -37,12 +37,14 @@ CREATE TABLE IF NOT EXISTS Characters(
     StarRating int,
     WeaponType varchar(25),
     ArtifactId int,
+	isActive tinyint,
     Obtained bool DEFAULT false
 );
 
 CREATE TABLE IF NOT EXISTS ArtifactSets(
 	ArtifactSetID int not null auto_increment primary key,
-    ArtifactSetName varchar(50) not null
+    ArtifactSetName varchar(50) not null,
+	isActive tinyint
 );
 
 CREATE TABLE IF NOT EXISTS Teams(
@@ -51,7 +53,8 @@ CREATE TABLE IF NOT EXISTS Teams(
     CharacterId1 int not null,
     CharacterId2 int not null,
     CharacterId3 int not null,
-    CharacterId4 int not null
+    CharacterId4 int not null,
+    isActive tinyint default 1
 );
 
 SELECT * FROM myusers where myusers.userid = 'myuser';
@@ -122,7 +125,7 @@ Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf 
 -- Characers
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Travler", "Anemo", 5, "Sword", 1, true);
+values ("Traveler", "Anemo", 5, "Sword", 1, true);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Amber", "Pyro", 4, "Bow", 1, true);
