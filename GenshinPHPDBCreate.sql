@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS Characters(
     StarRating int,
     WeaponType varchar(25),
     ArtifactId int,
+    ImageId int,
 	isActive tinyint default 1,
     Obtained bool DEFAULT false
 );
@@ -135,7 +136,7 @@ Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf 
 -- Characers
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Travler", "Anemo", 5, "Sword", 1, true);
+values ("Traveler", "Anemo", 5, "Sword", 1, true);
 
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Amber", "Pyro", 4, "Bow", 1, 1);
