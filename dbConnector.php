@@ -2,7 +2,7 @@
 
 // Create constants
 DEFINE('DB_USER', 'root');
-DEFINE('DB_PSWD', 'Nu190935810!');
+DEFINE('DB_PSWD', 'stupid');
 DEFINE('DB_SERVER', 'localhost');
 DEFINE('DB_NAME', 'genshinphp');
 
@@ -27,7 +27,7 @@ function AddNewUser($dbConn, $newUsername, $newPassword) {
 
 function CheckIfUsernameExists($dbConn, $newUsername) {
     $query = "SELECT UserID FROM MyUsers WHERE MyUsers.UserID = '$newUsername'";
-    
+
     return @mysqli_query($dbConn, $query);
 }
 
@@ -72,7 +72,7 @@ return $return;
 
 // ///////////////////////////////////////////////////
 // Get all the page records
-function MyPageremove($dbConn, $Id) {
+function MyPageRemove($dbConn, $Id) {
 
     // Never delete a page. set it to incative
     $query = "Update FROM MyWebDocs set isActive = 0 where id = " . $Id;
@@ -120,7 +120,7 @@ function MyJoinWhereGetCharacterElement($dbConn, $element)
 {
     $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
         FROM Characters cha LEFT JOIN ArtifactSets art
-        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $element . "'";
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Element = '" . $element . "'";
 
     return @mysqli_query($dbConn, $query);
 }
@@ -129,9 +129,26 @@ function MyJoinWhereGetCharacterObtained($dbConn, $obtained)
 {
     $query = "SELECT cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, art.ArtifactSetName
         FROM Characters cha LEFT JOIN ArtifactSets art
-        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.CharacterName = '" . $obtained . "'";
+        ON cha.ArtifactId = art.ArtifactSetID WHERE cha.Obtained = '" . $obtained . "'";
 
     return @mysqli_query($dbConn, $query);
+}
+
+function GetArtifacts($dbConn)
+{
+    $query = "SELECT ArtifactSetID, ArtifactSetName FROM ArtifactSets WHERE isActive = 1 order by ArtifactSetID asc";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetArtifactContent($dbConn, $Id)
+{
+    $return = null;
+
+    $query = "SELECT ArtifactSetID, ArtifactSetName FROM ArtifactSets where isActive = 1 and ArtifactSetID = " . $Id;
+    $return = @mysqli_query($dbConn, $query);
+
+    return $return;
 }
 
 ?>

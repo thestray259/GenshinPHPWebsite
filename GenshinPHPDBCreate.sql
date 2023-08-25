@@ -44,12 +44,14 @@ CREATE TABLE IF NOT EXISTS Characters(
 CREATE TABLE IF NOT EXISTS ArtifactSets(
 	ArtifactSetID int not null auto_increment primary key,
     ArtifactSetName varchar(50) not null,
+    Info varchar(225),
 	isActive tinyint
 );
 
 CREATE TABLE IF NOT EXISTS Teams(
 	TeamID int not null auto_increment primary key,
     TeamName varchar(50) not null,
+    Info varchar(225),
     CharacterId1 int not null,
     CharacterId2 int not null,
     CharacterId3 int not null,
@@ -144,10 +146,12 @@ values ("Collei", "Dendro", 4, "Bow", false);
 INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
 values ("Barbra", "Hydro", 4, "Catalyst", 3, false);
 
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Adventurer");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Instructor");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Berserker");
-INSERT INTO ArtifactSets (ArtifactSetName) values ("Traveling Doctor");
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Adventurer", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Instructor", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Berserker", 1);
+INSERT INTO ArtifactSets (ArtifactSetName, isActive) values ("Traveling Doctor", 1);
+
+Select * FROM ArtifactSets;
 
 SELECT cha.CharacterID, cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, artSets.ArtifactSetName
    FROM Characters cha LEFT JOIN ArtifactSets artSets
