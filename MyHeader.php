@@ -59,8 +59,8 @@ switch ($myStyle) {
         <br />
         <!-- Get the menu items -->
         <?php
-        //$myDbConn = ConnGet();
-    
+        $myDbConn = ConnGet();
+        
     // $recordset = MyPagesAllGet($myDbConn); 
     //$recordset = MyPagesGet($myDbConn, 0); 
     // Display the main menu

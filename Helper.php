@@ -15,7 +15,7 @@ function MenuDisplay($dataset) {
     } // End if
     else {
         echo "No menu items<br />";
-        echo mysqli_error($myDbConn);
+        //echo mysqli_error($myDbConn);
     }
 
 }

@@ -10,7 +10,7 @@ if($_SESSION["isAdmin"] == 0) {
 
 ?>
 
-<form>
+<form class="manage-pages-form">
     <label for="title">Title</label>
     <input type="text" id="title" name="title" placeholder="Enter Title" />
 

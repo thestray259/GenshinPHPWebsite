@@ -63,9 +63,21 @@ p {
     text-align: center;
 }
 
-form {
+.manage-pages-form {
     display: grid;
     margin: auto;
     width: 50%;
 }
+
+.login-form {
+    margin-left: 45%;
+    width: 150px;
 }
+
+.login-btn {
+    width: 75px;
+}
+.signup-btn {
+    width: 75px;
+}
+
