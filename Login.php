@@ -14,12 +14,18 @@ if($_SESSION['isAdmin'] == 1) {
 }
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-    <input type="text" name="username" placeholder="Username" />
-    <input type="password" name="password" placeholder="Password" />
-    <button class="btn" type="submit" name="login">Login</button>
+<div class="login-form">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
-</form>
+        <input type="text" name="username" placeholder="Username" />
+        <input type="password" name="password" placeholder="Password" />
+        <button class="login-btn" type="submit" name="login">Login</button>
+
+    </form>
+        <button class="signup-btn"> Sign up</button>
+
+
+</div>
 <br />
 <br />
 <?php
