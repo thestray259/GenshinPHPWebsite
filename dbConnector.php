@@ -2,7 +2,7 @@
 
 // Create constants
 DEFINE('DB_USER', 'root');
-DEFINE('DB_PSWD', 'Booboo1204!');
+DEFINE('DB_PSWD', 'Nu190935810!');
 DEFINE('DB_SERVER', 'localhost');
 DEFINE('DB_NAME', 'genshinphp');
 
@@ -16,6 +16,27 @@ function ConnGet() {
 
     return $dbConn;
 }
+
+function AddNewUser($dbConn, $newUsername, $newPassword) {
+    $isAdmin = 0;
+    $query = "INSERT INTO MyUsers (UserId, Pswd, isAdmin, isActive)
+                VALUES ('$newUsername', '$newPassword', $isAdmin, 1)";
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function CheckIfUsernameExists($dbConn, $newUsername) {
+    $query = "SELECT UserID FROM MyUsers WHERE MyUsers.UserID = '$newUsername'";
+    
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetUser($dbConn, $userName, $password) {
+    $query = "SELECT * FROM MyUsers WHERE MyUsers.UserID = ''$userName AND MyUsers.Pswd = '$password'";
+
+    return @mysqli_query($dbConn, $query);
+}
+
 // ///////////////////////////////////////////////////
 // Get Select records based on the Parent Id
 function MyPagesGet($dbConn, $Parent=0) {
