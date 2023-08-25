@@ -5,6 +5,10 @@ session_start();    // Must be first, prior to any HTML. Session will expire
 if (!isset($_SESSION["isAdmin"])) {
     $_SESSION["isAdmin"] = 0; // Set default
 }
+
+if(!isset($_SESSION["loggedIn"])) {
+    $_SESSION['loggedIn'] = false;
+}
 // Check for style setting
 if (isset($_COOKIE["MyStyle"])) {
     if (!isset($myStyle)){
