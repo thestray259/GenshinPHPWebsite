@@ -1,22 +1,20 @@
 CREATE DATABASE IF NOT EXISTS GenshinPHP;
 USE GenshinPHP;
 
-drop table MyUsers;
-drop table MyWebDocs;
-drop table Characters;
-drop table ArtifactSets;
-drop table Teams;
+-- drop table MyUsers;
+-- drop table MyWebDocs;
+-- drop table Characters;
+-- drop table ArtifactSets;
+-- drop table Teams;
 
 
 
 create table if not exists MyUsers(
  ID int not null AUTO_INCREMENT PRIMARY KEY,
- First_Name varchar(25) Not null,
- Last_Name varchar(25) Not null,
  UserId varchar(25),
  Pswd varchar(25),
- isAdmin int,
- isActive int
+ isAdmin tinyint,
+ isActive tinyint
 );
 
 create table if not exists MyWebDocs(
