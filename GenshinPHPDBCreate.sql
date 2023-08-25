@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS GenshinPHP;
 USE GenshinPHP;
 
--- drop table MyUsers;
+drop table MyUsers;
 -- drop table MyWebDocs;
 -- drop table Characters;
 -- drop table ArtifactSets;
@@ -54,21 +54,23 @@ CREATE TABLE IF NOT EXISTS Teams(
     CharacterId4 int not null
 );
 
+SELECT * FROM myusers where myusers.userid = 'myuser';
+
 -- Sample data
-INSERT INTO MyUsers ( id, First_Name, Last_Name, UserId, Pswd, isAdmin, isActive)
-VALUES    (1, 'uFirstName', 'uLastName', 'myuser', 'a', 0, 1)
+INSERT INTO MyUsers (UserId, Pswd, isAdmin, isActive)
+VALUES    ('users', 'a', 0, 1)
 ON DUPLICATE KEY UPDATE
-First_Name = 'uFirstName', Last_Name = 'uLastName', UserId = 'myuser', Pswd = 'a', isAdmin = 0, isActive = 1;
+UserId = 'myuser', Pswd = 'a', isAdmin = 0, isActive = 1;
 
-INSERT INTO MyUsers ( id, First_Name, Last_Name, UserId, Pswd, isAdmin, isActive)
-VALUES    (2, 'aFirstName', 'aLastName', 'myadmin', 'a', 1, 1)
+INSERT INTO MyUsers (UserId, Pswd, isAdmin, isActive)
+VALUES    ('myadmin', 'a', 1, 1)
 ON DUPLICATE KEY UPDATE
-First_Name = 'aFirstName', Last_Name = 'aLastName', UserId = 'myadmin', Pswd = 'a', isAdmin = 1, isActive = 1;
+UserId = 'myadmin', Pswd = 'a', isAdmin = 1, isActive = 1;
 
-INSERT INTO MyUsers ( id, First_Name, Last_Name, UserId, Pswd, isAdmin, isActive)
-VALUES    (2, 'aFirstName', 'aLastName', 'myadmin', 'a', 1, 1)
+INSERT INTO MyUsers ( id,  UserId, Pswd, isAdmin, isActive)
+VALUES    (2, 'myadmin', 'a', 1, 1)
 ON DUPLICATE KEY UPDATE
-First_Name = 'aFirstName', Last_Name = 'aLastName', UserId = 'myadmin', Pswd = 'a', isAdmin = 1, isActive = 1;
+UserId = 'myadmin', Pswd = 'a', isAdmin = 1, isActive = 1;
 
 -- Main links/pages
 INSERT INTO MyWebDocs ( WebDocID, Title, Header1, Text1, SortOrder, isActive)
