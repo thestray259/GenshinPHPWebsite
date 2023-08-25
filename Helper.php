@@ -1,5 +1,5 @@
 <?php
-// include_once "dbConnector.php";
+include_once "dbConnector.php";
 ?>
 
 <?php
@@ -36,8 +36,79 @@ function PageDisplay($PageData) {
 
 }
 
+function GetDBObtainedCharacters()
+{
+    $myDbConn = ConnGet();
+    $myGet = $_GET["obtained"];
 
+    $DataSet = MyJoinWhereGetCharacterObtained($myDbConn, $myGet);
 
+    if ($DataSet)
+    {
+        if ($row = mysqli_fetch_array($DataSet))
+        {
+            $myJson = '[{"CharacterName":' . $row['CharacterName'] . '","CharacterLevel":"' . $row['CharacterLevel']
+                . '","Element":"' . $row['Element'] . '","ConstellationLevel":"' . $row['ConstellationLevel'] . '","StarRating":"'
+                . $row['StarRating'] . '"WeaponType":"' . $row['WeaponType'] . '"}]';
+        }
+    }
+    mysqli_close($myDbConn);
+    echo $myJson;
+}
 
+function GetAllData()
+{
+    $myDbConn = ConnGet();
+    $myJsonResult = MyJoinJsonGet($myDbConn);
 
+    $myJSON = null;
+    $row = null;
+
+    if ($myJsonResult) {
+        while ($row = mysqli_fetch_array($myJsonResult)) {
+            $rowArray[] = json_decode($row[0]);
+        }
+
+        $myJSON = json_encode($rowArray, JSON_PRETTY_PRINT);
+    }
+
+    mysqli_close($myDbConn);
+    echo "<pre>" . $myJSON . "<pre/>";
+}
+
+function GetDBDataWithId()
+{
+    $myDbConn = ConnGet();
+    $myGet = $_GET["chaIndex"];
+
+    $DataSet = MyJoinWhereGetCharacterID($myDbConn, $myGet);
+
+    if ($DataSet) {
+        if ($row = mysqli_fetch_array($DataSet)) {
+            $myJson = '[{"CharacterName":' . $row['CharacterName'] . '","CharacterLevel":"' . $row['CharacterLevel']
+                . '","Element":"' . $row['Element'] . '","ConstellationLevel":"' . $row['ConstellationLevel'] . '","StarRating":"'
+                . $row['StarRating'] . '"WeaponType":"' . $row['WeaponType'] . '"}]';
+        }
+    }
+    mysqli_close($myDbConn);
+    echo $myJson;
+}
+
+function GetDBDataWithName()
+{
+    $myDbConn = ConnGet();
+    $myGet = $_GET["chaName"];
+
+    $DataSet = MyJoinWhereGetCharacterName($myDbConn, $myGet);
+
+    if ($DataSet) {
+        if ($row = mysqli_fetch_array($DataSet)) {
+            $myJson = '[{"CharacterName":' . $row['CharacterName'] . '","CharacterLevel":"' . $row['CharacterLevel']
+                . '","Element":"' . $row['Element'] . '","ConstellationLevel":"' . $row['ConstellationLevel'] . '","StarRating":"'
+                . $row['StarRating'] . '"WeaponType":"' . $row['WeaponType'] . '"}]';
+        }
+    }
+    mysqli_close($myDbConn);
+    echo $myJson;
+}
 ?>
