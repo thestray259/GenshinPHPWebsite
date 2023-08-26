@@ -12,7 +12,7 @@ $data = mysqli_fetch_row($character);
     echo "<p>Star Rating: " . $data[3] . " out of 5 </p>";
     echo "<p>Weapon Type: " . $data[4] . " </p>";
     if ($data[5]) {
-        echo "<p>Weapon Type: " . $data[5] . " </p>";
+        echo "<p>Artifact Set: " . $data[5] . " </p>";
     }
     echo "<br><br><br>"
     ?>
