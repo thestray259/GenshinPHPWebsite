@@ -149,12 +149,11 @@ function GetArtifacts($dbConn)
 
 function GetArtifactContent($dbConn, $Id)
 {
-    $return = null;
+    $query = "SELECT art.ArtifactSetID, art.ArtifactSetName, img.ImageData, art.isActive
+                FROM ArtifactSets art LEFT JOIN Images img ON art.ImageId = img.ImageId
+                WHERE art.isActive = 1 AND art.ArtifactSetID = " . $Id;
 
-    $query = "SELECT art.ArtifactSetID, art.ArtifactSetName, img.ImageData, art.isActive FROM ArtifactSets art LEFT JOIN Images img ON art.ImageId = img.ImageId WHERE art.isActive = 1 AND art.ArtifactSetID = " . $Id;
-    $return = @mysqli_query($dbConn, $query);
-
-    return $return;
+    return @mysqli_query($dbConn, $query);
 }
 
 function GetTeams($dbConn)
@@ -164,6 +163,40 @@ function GetTeams($dbConn)
             LEFT JOIN Characters cha2 ON team.CharacterId2 = cha2.CharacterID
             LEFT JOIN Characters cha3 ON team.CharacterId3 = cha3.CharacterID
             LEFT JOIN Characters cha4 ON team.CharacterId4 = cha4.CharacterID WHERE team.isActive = 1";
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetTeamContent($dbConn, $Id)
+{
+    $query = "SELECT team.TeamID, team.TeamName, team.Info, cha1.CharacterName, img1.ImageData, cha2.CharacterName, img2.ImageData, cha3.CharacterName, img3.ImageData, cha4.CharacterName, img4.ImageData FROM Teams team
+            LEFT JOIN Characters cha1 ON team.CharacterId1 = cha1.CharacterID
+            LEFT JOIN Characters cha2 ON team.CharacterId2 = cha2.CharacterID
+            LEFT JOIN Characters cha3 ON team.CharacterId3 = cha3.CharacterID
+            LEFT JOIN Characters cha4 ON team.CharacterId4 = cha4.CharacterID
+            LEFT JOIN Images img1 ON cha1.ImageId = img1.ImageId
+            LEFT JOIN Images img2 ON cha2.ImageId = img2.ImageId
+            LEFT JOIN Images img3 ON cha3.ImageId = img3.ImageId
+            LEFT JOIN Images img4 ON cha4.ImageId = img4.ImageId
+            WHERE team.isActive = 1 AND team.TeamID= " . $Id;
+
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetCharacters($dbConn)
+{
+    $query = "SELECT cha.CharacterId, cha.CharacterName, cha.Element, cha.StarRating, cha.WeaponType, art.ArtifactSetName, cha.Obtained
+                FROM Characters cha LEFT JOIN ArtifactSets art ON cha.ArtifactId = art.ArtifactSetID
+                WHERE cha.isActive = 1";
+    return @mysqli_query($dbConn, $query);
+}
+
+function GetCharacterContent($dbConn, $Id)
+{
+    $query = "SELECT img.ImageData, cha.CharacterName, cha.Element, cha.StarRating, cha.WeaponType, art.ArtifactSetName FROM Characters cha 
+                LEFT JOIN ArtifactSets art ON cha.ArtifactId = art.ArtifactSetID 
+                LEFT JOIN Images img ON cha.ImageId = img.ImageId
+                WHERE cha.isActive = 1 AND cha.CharacterID= " . $Id;
+
     return @mysqli_query($dbConn, $query);
 }
 ?>

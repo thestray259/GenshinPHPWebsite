@@ -10,8 +10,10 @@ if (array_key_exists("logout", $_POST)) {
 <nav>
     <ul>
         <li><a href="/index.php">Home</a></li>
+        <li><a href="/ArtifactSets/ArtifactList.php">Artifacts</a></li>
+        <li><a href="/Characters/CharacterList.php">Characters</a></li>
+        <li><a href="/Teams/TeamList.php">Teams</a></li>
         <li><a href="/About/AboutPage.php">About</a></li>
-        <li><a href="/CharacterListPage.php">Characters</a></li>
         <li><a href="/Contact/ContactPage.php">Contact</a></li>
         <li><a href="/Preferences.php">My Preferences </a></li>
 

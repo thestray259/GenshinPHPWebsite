@@ -26,3 +26,7 @@ $artifacts = GetArtifacts($myDbConn);
     unset($data)
     ?>
 </table>
+
+<?php
+include_once "..\MyFooter.php";
+?>

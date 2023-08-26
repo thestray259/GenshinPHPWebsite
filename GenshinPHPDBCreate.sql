@@ -133,33 +133,11 @@ ON DUPLICATE KEY UPDATE
 Title = 'Something 2', Header1 = 'Sub Header number 2', Text1 = 'My text, asfaf af af af a sag asf saf', ParentPage = 2, SortOrder = 4, isActive = 1;
 
 -- ---------------------
--- Characers
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Traveler", "Anemo", 5, "Sword", 1, true);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Amber", "Pyro", 4, "Bow", 1, 1);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Lisa", "Electro", 4, "Catalyst", 0);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Kaeya", "Cryo", 4, "Sword", 0);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Noelle", "Geo", 4, "Claymore", 0);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, Obtained)
-values ("Collei", "Dendro", 4, "Bow", 0);
-
-INSERT INTO Characters (CharacterName, Element, StarRating, WeaponType, ArtifactId, Obtained)
-values ("Barbara", "Hydro", 4, "Catalyst", 3, 0);
-
 -- Must copy images to the corresponding directory
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/Adventurer.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/Instructor.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/Berserker.jpg"));
+INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/Traveling Doctor.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/travelers.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/amber.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/lisa.jpg"));
@@ -167,6 +145,29 @@ INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Ser
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/noelle.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/collei.jpg"));
 INSERT INTO Images (ImageData) values (LOAD_FILE("C:/ProgramData/MySQL/MySQL Server 8.1/Uploads/barbara.jpg"));
+
+-- Characers
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, ArtifactId, Obtained)
+values ("Traveler", 5, "Anemo", 5, "Sword", 1, true);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, ArtifactId, Obtained)
+values ("Amber", 6, "Pyro", 4, "Bow", 1, 1);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, Obtained)
+values ("Lisa", 7, "Electro", 4, "Catalyst", 0);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, Obtained)
+values ("Kaeya", 8, "Cryo", 4, "Sword", 0);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, Obtained)
+values ("Noelle", 9, "Geo", 4, "Claymore", 0);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, Obtained)
+values ("Collei", 10, "Dendro", 4, "Bow", 0);
+
+INSERT INTO Characters (CharacterName, ImageId, Element, StarRating, WeaponType, ArtifactId, Obtained)
+values ("Barbara", 11, "Hydro", 4, "Catalyst", 3, 0);
 
 INSERT INTO ArtifactSets (ArtifactSetName, ImageId) values ("Adventurer", 1);
 INSERT INTO ArtifactSets (ArtifactSetName, ImageId) values ("Instructor", 2);
@@ -176,13 +177,8 @@ INSERT INTO ArtifactSets (ArtifactSetName, ImageId) values ("Traveling Doctor", 
 INSERT INTO Teams (TeamName, Info, CharacterId1, CharacterId2, CharacterId3, CharacterId4, isActive)
 values ("Isaiah's Team", "It's my team", 1, 3, 5, 7, 1);
 
-select * from images;
-
-SELECT team.TeamID, team.TeamName, team.Info, cha1.CharacterName, cha2.CharacterName, cha3.CharacterName, cha4.CharacterName
-FROM Teams team LEFT JOIN Characters cha1 ON team.CharacterId1 = cha1.CharacterID
-LEFT JOIN Characters cha2 ON team.CharacterId2 = cha2.CharacterID
-LEFT JOIN Characters cha3 ON team.CharacterId3 = cha3.CharacterID
-LEFT JOIN Characters cha4 ON team.CharacterId4 = cha4.CharacterID;
+SELECT img.ImageData, cha.CharacterName, cha.Element, cha.StarRating, cha.WeaponType, art.ArtifactSetName FROM Characters cha LEFT JOIN ArtifactSets art ON cha.ArtifactId = art.ArtifactSetID LEFT JOIN Images img ON cha.ImageId = img.ImageId;
+select * from characters;
 
 SELECT cha.CharacterID, cha.CharacterName, cha.CharacterLevel, cha.Element, cha.ConstellationLevel, cha.StarRating, cha.WeaponType, cha.ArtifactId, cha.Obtained, artSets.ArtifactSetName
    FROM Characters cha LEFT JOIN ArtifactSets artSets

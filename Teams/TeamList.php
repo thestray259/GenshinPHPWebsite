@@ -1,4 +1,5 @@
 <?php
+$myHeader = "Teams";
 include_once "../MyHeader.php";
 $teams = GetTeams($myDbConn);
 ?>
@@ -41,3 +42,7 @@ $teams = GetTeams($myDbConn);
     unset($data)
     ?>
 </table>
+
+<?php
+include_once "..\MyFooter.php";
+?>

@@ -1,8 +1,8 @@
 <?php
-include_once "MyHeader.php";
-include_once "Helper.php";
-
 $myHeader = "Characters";
+
+include_once "../MyHeader.php";
+include_once "../Helper.php";
 ?>
 
 <!--<h2>March 7th</h2>
@@ -66,4 +66,6 @@ if (array_key_exists("btnSubmitName", $_GET)) {
 
 ?>
 
-
+<?php
+include_once "MyFooter.php"
+?>
